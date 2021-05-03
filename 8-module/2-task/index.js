@@ -38,13 +38,8 @@ export default class ProductGrid {
 
 
   updateFilter(newFilter) {
-    if (this._filter) {
-      Object.assign(this._filter, newFilter);
-    } else {
-      this._filter = newFilter;
-    };
-
-    let { noNuts, vegeterianOnly, maxSpiciness, category } = this._filter;
+    Object.assign(this.filters, newFilter);
+    let { noNuts, vegeterianOnly, maxSpiciness, category } = this.filters;
 
     function filterNoNuts(item) {
       if (noNuts) {
@@ -111,7 +106,7 @@ export default class ProductGrid {
       };
     }
 
-      this._gridArray.map(filter);
+    this._gridArray.map(filter);
   }
 
 
