@@ -49,7 +49,7 @@ export default class UserTable {
     }
 
 
-    document.body.addEventListener("click", (event) => {
+    table.addEventListener("click", (event) => {
       let target = event.target;
       if (target.tagName == "BUTTON") {
         target.closest("tr").remove();

@@ -31,7 +31,7 @@ export default class RibbonMenu {
         let ribbonSelectEvent = new CustomEvent('ribbon-select', { 
           detail: event.target.dataset.id, 
           bubbles: true 
-        })
+        });
 
         this._ribbon.dispatchEvent(ribbonSelectEvent);
       };
