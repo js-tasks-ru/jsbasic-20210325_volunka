@@ -161,7 +161,6 @@ export default class Cart {
     });
 
     modalBody.addEventListener("submit", async (event) => {
-      event.preventDefault();
       this.onSubmit(event);
     });
   }
@@ -191,6 +190,7 @@ export default class Cart {
   }
 
   async onSubmit(event) {
+    event.preventDefault();
     const form = event.target;
     form.querySelector(`button[type="submit"]`).classList.add("is-loading");
     const response = await fetch('https://httpbin.org/post', {
@@ -208,7 +208,7 @@ export default class Cart {
         <img src="/assets/images/delivery.gif">
       </p>
     </div>`);
-    this._modal.setBody(newModalBody);
+      this._modal.setBody(newModalBody);
     };
   }
 

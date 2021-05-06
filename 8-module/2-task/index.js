@@ -41,6 +41,10 @@ export default class ProductGrid {
     Object.assign(this.filters, newFilter);
     let { noNuts, vegeterianOnly, maxSpiciness, category } = this.filters;
 
+    const productsGridInner = this._productsGrid.querySelector(".products-grid__inner");
+    productsGridInner.innerHTML = "";
+
+
     function filterNoNuts(item) {
       if (noNuts) {
 
@@ -100,13 +104,11 @@ export default class ProductGrid {
 
     function filter(item) {
       if (filterCategory(item) && filterMaxSpiciness(item) && filterVegeterianOnly(item) && filterNoNuts(item)) {
-        item.card.style.display = "";
-      } else {
-        item.card.style.display = "none";
+        productsGridInner.append(item.card);
       };
     }
 
-    this._gridArray.map(filter);
+    this._gridArray.forEach(filter);
   }
 
 
