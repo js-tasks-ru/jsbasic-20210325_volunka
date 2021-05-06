@@ -5,13 +5,8 @@ export default class ProductGrid {
   constructor(products) {
     this.products = products;
     this.filters = {};
+    this.elem = this._render();
   }
-
-  get elem() {
-    return this._render();
-  }
-
-
 
   _render() {
     const productsGrid = document.createElement("div");
