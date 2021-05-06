@@ -40,7 +40,7 @@ export default class CartIcon {
 
   updatePosition() {
     const icon = this.elem;
-    const container = document.querySelector('.container');
+    const container = this.elem.closest('.container');
     let initialTopCoord;
 
 
