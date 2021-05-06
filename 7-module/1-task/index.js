@@ -37,12 +37,6 @@ export default class RibbonMenu {
       };
     });
 
-
-    this._ribbon.addEventListener("ribbon-select", (event) => {
-      console.dir(event.detail);
-    })
-    
-
   }
   _render() {
     if (!this._ribbon) {

@@ -72,9 +72,6 @@ export default class StepSlider {
       };
     });
 
-    document.addEventListener("slider-change", (event) => {
-      console.log(event.detail);
-    });
   }
 
   _render() {

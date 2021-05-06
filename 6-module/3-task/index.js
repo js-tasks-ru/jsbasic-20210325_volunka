@@ -54,10 +54,6 @@ export default class Carousel {
       };
     }
 
-    document.body.addEventListener("product-add", (event) => {
-      console.dir(event.detail);
-      console.dir(event.target);
-    })
 
     divCarouselArrowLeft.style.display = 'none';
 
