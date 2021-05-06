@@ -6,6 +6,39 @@ export default class Carousel {
     this._carouselCurrenPosition = 1;
     this._carouselInner = {};
     this.elem = this._render();
+
+    const CarouselArrowRight= this.elem.querySelector(".carousel__arrow_right");
+    const CarouselArrowLeft= this.elem.querySelector(".carousel__arrow_left");
+    
+    CarouselArrowLeft.addEventListener("click", () => {
+      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
+        CarouselArrowRight.style.display = '';
+      }
+      this._moveCarouselRight();
+      if (this._carouselCurrenPosition == 1) {
+        CarouselArrowLeft.style.display = 'none';
+      }
+    });
+
+    CarouselArrowRight.addEventListener("click", () => {
+      if (this._carouselCurrenPosition == 1) {
+        CarouselArrowLeft.style.display = '';
+      }
+      this._moveCarouselLeft();
+      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
+        CarouselArrowRight.style.display = 'none';
+      }
+    });
+
+    this.elem.onclick = (click) => {
+      if (click.target.closest(".carousel__button")) {
+        let event = new CustomEvent("product-add", {
+          detail: click.target.closest(".carousel__slide").dataset.id,
+          bubbles: true
+        });
+        this.elem.dispatchEvent(event);
+      };
+    }
   }
   _render() {
     const divCarousel = document.createElement('div');
@@ -39,44 +72,11 @@ export default class Carousel {
     divCarousel.append(divCarouselArrowLeft);
     divCarousel.append(divCarouselInner);
 
-
     for (let slide of this.slides) {
       divCarouselInner.append(this._renderCarouselSlide(slide));
     }
 
-    divCarousel.onclick = (click) => {
-      if (click.target.closest(".carousel__button")) {
-        let event = new CustomEvent("product-add", {
-          detail: click.target.closest(".carousel__slide").dataset.id,
-          bubbles: true
-        });
-        divCarousel.dispatchEvent(event);
-      };
-    }
-
-
     divCarouselArrowLeft.style.display = 'none';
-
-    divCarouselArrowLeft.addEventListener("click", () => {
-      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
-        divCarouselArrowRight.style.display = '';
-      }
-      this._moveCarouselRight();
-      if (this._carouselCurrenPosition == 1) {
-        divCarouselArrowLeft.style.display = 'none';
-      }
-    });
-
-    divCarouselArrowRight.addEventListener("click", () => {
-      if (this._carouselCurrenPosition == 1) {
-        divCarouselArrowLeft.style.display = '';
-      }
-      this._moveCarouselLeft();
-      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
-        divCarouselArrowRight.style.display = 'none';
-      }
-    });
-
     return divCarousel;
   }
 

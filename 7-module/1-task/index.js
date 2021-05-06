@@ -3,7 +3,7 @@ import createElement from '../../assets/lib/create-element.js';
 export default class RibbonMenu {
   constructor(categories) {
     this.categories = categories;
-    this._render();
+    this.elem = this._render();
 
 
     this._ribbon.addEventListener("click", (event) => {
@@ -67,9 +67,6 @@ export default class RibbonMenu {
     this._ribbon.append(this._ribbonButtonLeft);
     this._ribbon.append(this._nav);
     this._ribbon.append(this._ribbonButtonRight);
-  }
-
-  get elem() {
     return this._ribbon;
   }
 
