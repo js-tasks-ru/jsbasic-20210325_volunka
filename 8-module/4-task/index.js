@@ -160,7 +160,7 @@ export default class Cart {
       };
     });
 
-    this._modalBody.querySelector(".cart-form").addEventListener("submit", async (event) => {
+    this._modalBody.querySelector(".cart-form").addEventListener("submit", (event) => {
       this.onSubmit(event);
     });
   }
@@ -189,27 +189,29 @@ export default class Cart {
     };
   }
 
-  async onSubmit(event) {
+  onSubmit(event) {
     event.preventDefault();
     const form = event.target;
     form.querySelector(`button[type="submit"]`).classList.add("is-loading");
-    const response = await fetch('https://httpbin.org/post', {
+    const request = fetch('https://httpbin.org/post', {
       method: 'POST',
       body: new FormData(form)
     });
-    if (response.ok) {
-      this._modal.setTitle('Success!');
-      this.cartItems.length = 0;
-      this.cartIcon.update(this);
-      const newModalBody = createElement(`<div class="modal__body-inner">
-      <p>
-        Order successful! Your order is being cooked :) <br>
-        We’ll notify you about delivery time shortly.<br>
-        <img src="/assets/images/delivery.gif">
-      </p>
-    </div>`);
-      this._modal.setBody(newModalBody);
-    };
+    request.then(response => {
+      if (response.ok) {
+        this._modal.setTitle('Success!');
+        this.cartItems.length = 0;
+        this.cartIcon.update(this);
+        const newModalBody = createElement(`<div class="modal__body-inner">
+        <p>
+          Order successful! Your order is being cooked :) <br>
+          We’ll notify you about delivery time shortly.<br>
+          <img src="/assets/images/delivery.gif">
+        </p>
+      </div>`);
+        this._modal.setBody(newModalBody);
+      };
+    });
   }
 
   addEventListeners() {
