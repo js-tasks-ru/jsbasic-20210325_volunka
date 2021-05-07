@@ -160,7 +160,7 @@ export default class Cart {
       };
     });
 
-    modalBody.addEventListener("submit", async (event) => {
+    this._modalBody.querySelector(".cart-form").addEventListener("submit", async (event) => {
       this.onSubmit(event);
     });
   }
