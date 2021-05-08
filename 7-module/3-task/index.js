@@ -17,10 +17,6 @@ export default class StepSlider {
         this._slider.dispatchEvent(changeSliderEvent);
       }
     });
-
-    document.addEventListener("slider-change", (event) => {
-      console.log(event.detail);
-    })
   }
 
   _render() {

@@ -7,35 +7,6 @@ export default class Carousel {
     this._carouselInner = {};
     this._render();
 
-    this._carouselArrowLeft.addEventListener("click", () => {
-      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
-        this._carouselArrowRight.style.display = '';
-      }
-      this._moveCarouselRight();
-      if (this._carouselCurrenPosition == 1) {
-        this._carouselArrowLeft.style.display = 'none';
-      }
-    });
-
-    this._carouselArrowRight.addEventListener("click", () => {
-      if (this._carouselCurrenPosition == 1) {
-        this._carouselArrowLeft.style.display = '';
-      }
-      this._moveCarouselLeft();
-      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
-        this._carouselArrowRight.style.display = 'none';
-      }
-    });
-
-    this._carouselInner.onclick = (click) => {
-      if (click.target.closest(".carousel__button")) {
-        let event = new CustomEvent("product-add", {
-          detail: click.target.closest(".carousel__slide").dataset.id,
-          bubbles: true
-        });
-        this.elem.dispatchEvent(event);
-      };
-    }
 
   }
   _render() {
@@ -76,6 +47,36 @@ export default class Carousel {
 
     this._carouselArrowLeft.style.display = 'none';
     this.elem = divCarousel;
+
+    this._carouselArrowLeft.addEventListener("click", () => {
+      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
+        this._carouselArrowRight.style.display = '';
+      }
+      this._moveCarouselRight();
+      if (this._carouselCurrenPosition == 1) {
+        this._carouselArrowLeft.style.display = 'none';
+      }
+    });
+
+    this._carouselArrowRight.addEventListener("click", () => {
+      if (this._carouselCurrenPosition == 1) {
+        this._carouselArrowLeft.style.display = '';
+      }
+      this._moveCarouselLeft();
+      if (this._carouselCurrenPosition == this._carouselSlidesCount) {
+        this._carouselArrowRight.style.display = 'none';
+      }
+    });
+
+    this.elem.onclick = (click) => {
+      if (click.target.closest(".carousel__button")) {
+        let event = new CustomEvent("product-add", {
+          detail: click.target.closest(".carousel__slide").dataset.id,
+          bubbles: true
+        });
+        this.elem.dispatchEvent(event);
+      };
+    }
   }
 
   _renderCarouselSlide({ name, price, image, id }) {
